@@ -20,13 +20,15 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask; //Máscara para el suelo
     bool isGrounded;
 
-    void Update()
+     void Update()
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
 
         transform.Rotate(0, x * Time.deltaTime * rotationSpeed, 0); //Girar
         transform.Translate(0, 0, y * Time.deltaTime * runSpeed); //Correr
+        
+
         animator.SetFloat("VelX", x); //Animación del Movimiento al correr/Girar/Saltar
         animator.SetFloat("VelY", y); //Animación del Movimiento al correr/Girar/Saltar
 
@@ -35,10 +37,11 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey("space") && isGrounded){      //Si oprime la barra y está en el suelo, salte
             animator.Play("Jump"); 
             Invoke("Jump", 1f);
+            
         }
     }
 
     public void Jump(){
-        rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse); //Añade una fuerza hacia arriba con impulso
+        rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse); //Añade una fuerza hacia arriba con impulso 
     }
 }
